@@ -143,7 +143,7 @@ def rolling_backtest_fixed(
     g: pd.DataFrame,
     feature_cols: List[str],
     model_factory,
-    min_train: int = 12,
+    min_train: int = 8,
 ) -> Tuple[float, int, str]:
     """
     FIX 4: Rolling validation with feature rebuilding in each slice.
@@ -152,7 +152,7 @@ def rolling_backtest_fixed(
     """
     g = g.sort_values("draw_date")
 
-    if g.shape[0] <= min_train:
+    if g.shape[0] < min_train:
         return np.nan, 0, f"Insufficient data ({g.shape[0]} events, need {min_train}+)"
 
     preds, actuals = [], []
