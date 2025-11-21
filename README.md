@@ -5,6 +5,7 @@
 ## 使用方式
 - 安装依赖：`python -m pip install -r requirements.txt`
 - 运行管道：`python src/aaip_pipeline.py`
+- 高级事件级建模与验证：`python src/advanced_analysis.py`
 
 输出
 - 原始抓取表：`data/raw/aaip_draws_raw.csv`（官网表格原样）
@@ -12,6 +13,9 @@
 - 事件级图：`reports/figures/aaip_2025_event_timeline.png`
 - 事件级预测图：`reports/figures/aaip_2025_event_forecasts.png`
 - 基于随机森林的事件级预测输出：`data/processed/aaip_event_forecasts_rf.csv`
+- 高级事件级预测（滚动验证+多模型对比）：`data/processed/aaip_event_forecasts_advanced.csv`
+- 高级建模报告（MAE/最优模型/预测表）：`reports/aaip_event_model_report.md`
+- 事件间隔与累计趋势探索：`data/processed/aaip_draw_stats.csv`，`reports/figures/aaip_2025_gap_hist.png`，`reports/figures/aaip_2025_cumulative_invites.png`
 
 ## 数据质量说明
 - 仅使用官方 Alberta AAIP 页面，通过 `pandas.read_html` 获取。
@@ -29,3 +33,13 @@
 - 特征：日期 ordinal、抽签间隔、邀请数的前1/2次滞后、3期滚动均值、前一期最低分。
 - 评估：每个流用最后 2 次抽签作为测试集，输出线性/随机森林 MAE 对比。
 - 预测：按流训练随机森林，使用中位间隔推算未来抽签日期，生成未来 3 次预测并写入 `data/processed/aaip_event_forecasts_rf.csv`。
+
+## 高级事件级分析（多模型对比 + 滚动验证）
+- 脚本：`python src/advanced_analysis.py`
+- 特征：日期 ordinal、抽签间隔、邀请数滞后1/2/3、滚动均值、滞后最低分、月份、day-of-year 正余弦、事件序号。
+- 评估：滚动时间序列验证（逐点前滚），对比线性回归、随机森林、梯度提升，输出 MAE。
+- 预测：为每个流选取验证 MAE 最低的模型，基于历史中位间隔外推未来抽签日期，迭代滞后生成未来 3 次预测，结果写入 `data/processed/aaip_event_forecasts_advanced.csv` 并在 `reports/aaip_event_model_report.md` 记录。
+
+## 事件级探索
+- 脚本：`python src/event_insights.py`
+- 内容：按流计算抽签间隔分布、总邀请/均值/中位数、缺失邀请数行数；生成间隔直方图与累计邀请趋势图。
