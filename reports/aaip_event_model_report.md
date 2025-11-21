@@ -9,7 +9,7 @@
 | Alberta Express Entry Stream | Linear | 143.82 | 20 | 28 |
 | Alberta Express Entry Stream | RandomForest | 61.0 | 20 | 28 |
 | Alberta Express Entry Stream | GradientBoosting | 62.98 | 20 | 28 |
-| Alberta Opportunity Stream | Linear | 502.52 | 4 | 12 |
+| Alberta Opportunity Stream | Linear | 502.5 | 4 | 12 |
 | Alberta Opportunity Stream | RandomForest | 164.66 | 4 | 12 |
 | Alberta Opportunity Stream | GradientBoosting | 142.0 | 4 | 12 |
 | Dedicated Health Care Pathway | Linear | 36.08 | 10 | 18 |
