@@ -2,6 +2,26 @@
 
 从阿尔伯塔省政府官网 https://www.alberta.ca/aaip-processing-information 抓取所有 AAIP 抽签事件（不做按月汇总），清洗 2025 年数据，生成事件级可视化与简易预测。
 
+## 🆕 最新更新 (2025-11-20)
+
+**✅ Codex Critical Fixes Applied**:
+- 修复滚动验证逻辑错误（测试集特征被过滤导致预测失败）
+- 修复Bootstrap随机种子问题（避免所有流使用相同的重采样）
+- 对齐英文可视化与修正后的模型（使用fixed_modeling.py）
+
+**✨ AOS/ATP 增强分析**:
+- 新增 AOS（Alberta Opportunity Stream）深度分析
+- 新增 ATP（Accelerated Tech Pathway）专项分析
+- 生成4张专用图表 + 综合报告
+- 提供5次抽签预测及95%置信区间
+
+**📊 查看详情**:
+- `CODEX_FIXES_AND_ENHANCEMENTS_SUMMARY.md` - 完整技术说明
+- `UPDATES_2025-11-20.md` - 快速更新概览
+- `reports/aos_atp_analysis/` - AOS/ATP专项分析
+
+---
+
 ## 使用方式
 - 安装依赖：`python -m pip install -r requirements.txt`
 - 运行管道：`python src/aaip_pipeline.py`
